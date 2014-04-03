@@ -1,6 +1,9 @@
 #ifndef __BYTECODE_H__
 #define __BYTECODE_H__
 
+extern char FSR[];
+extern int PC;
+
 typedef enum {
 				ACCESS = -5,
 				BANKED,
@@ -31,6 +34,7 @@ typedef struct {
 	int operand1;
 	int operand2;
 	int operand3;
+	int absoluteAdress;
 } Bytecode;
 
 #endif // __BYTECODE_H__
