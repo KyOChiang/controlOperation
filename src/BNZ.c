@@ -9,7 +9,11 @@ void bnz(Bytecode *code){
 
 	if((code->operand1 - code->absoluteAdress) > 127||(code->operand1 - code->absoluteAdress) < -128)
 		Throw(ERR_INVALID_OPERAND1);
-	
+	if(code->operand2 != -1)
+		Throw(ERR_INVALID_OPERAND2);
+	if(code->operand3 != -1)
+		Throw(ERR_INVALID_OPERAND3);
+		
 	
 	
 	
