@@ -13,7 +13,13 @@ void bnz(Bytecode *code){
 		Throw(ERR_INVALID_OPERAND2);
 	if(code->operand3 != -1)
 		Throw(ERR_INVALID_OPERAND3);
-		
+	
+	if(FSR[STATUS] == 0x00){
+		PC = code->operand1;
+	}
+	else if(FSR[STATUS] == 0x04){
+		PC = PC + 0x02;
+	}
 	
 	
 	
