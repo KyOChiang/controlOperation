@@ -51,3 +51,21 @@ void test_CALL_should_throw_exception_if_operand3_is_non_empty(){
 	
 	TEST_ASSERT_EQUAL(0xAA,code.absoluteAddress);
 }
+
+void test_CALL_should_throw_exception_if_range_between_absoluteAddress_and_operand1_out_of_limit(){
+	CEXCEPTION_T operandERR;
+	
+	Bytecode code = {.instruction = {.mnemonic = CALL, .name = "CALL"},
+					 .operand1 = 0x8FFFFFFF,
+					 .operand2 = -1,
+					 .operand3 = -1,
+					 .absoluteAddress = 0xAA
+					 };				 
+	Try{
+		call(&code);
+	}Catch(operandERR){
+		TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND1,operandERR);
+	}
+	
+	TEST_ASSERT_EQUAL(0xAA,code.absoluteAddress);
+}
