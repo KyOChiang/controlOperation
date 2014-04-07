@@ -12,9 +12,14 @@
 #define _CALL_H_
 
 #define WREG 0xFE8
+#define TOSU 0xFFF
+#define TOSH 0xFFE
+#define TOSL 0xFFD
+#define STKPTR 0xFFC
 
 extern char FSR[];
+extern long int PIC18Stack[];
 
-void call(Bytecode *code);
+long int call(Bytecode *code);
 
 #endif

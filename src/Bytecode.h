@@ -12,7 +12,6 @@
 #define __BYTECODE_H__
 
 extern char FSR[];
-extern int PC;
 
 typedef enum {
 				ACCESS = -5,
@@ -32,6 +31,7 @@ typedef enum {
 				ERR_INVALID_OPERAND1,
 				ERR_INVALID_OPERAND2,
 				ERR_INVALID_OPERAND3,
+				ERR_STKPTR_OVERFLOW
 } ExceptionError;
 
 typedef struct {
@@ -41,10 +41,10 @@ typedef struct {
 
 typedef struct {
 	Instruction instruction;
-	int operand1;
+	long int operand1;
 	int operand2;
 	int operand3;
-	int absoluteAdress;
+	long int absoluteAddress;
 } Bytecode;
 
 #endif // __BYTECODE_H__

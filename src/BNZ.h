@@ -16,6 +16,6 @@
 
 extern char FSR[];
 
-void bnz(Bytecode *code);
+int bnz(Bytecode *code);
 
 #endif
