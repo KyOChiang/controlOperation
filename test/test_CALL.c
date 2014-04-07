@@ -121,3 +121,22 @@ void test_CALL_should_go_to_0xAC_and_0x5026_will_push_to_TOS_and_STKPTR_incremen
 	TEST_ASSERT_EQUAL_HEX8(0x26,FSR[TOSL]);
 	TEST_ASSERT_EQUAL(2,FSR[STKPTR]);
 }
+
+void test_CALL_should_throw_exception_if_STKPTR_overflow(){
+	CEXCEPTION_T operandERR;
+	
+	Bytecode code = {.instruction = {.mnemonic = CALL, .name = "CALL"},
+					 .operand1 = 0x8FFF,
+					 .operand2 = -1,
+					 .operand3 = -1,
+					 .absoluteAddress = 0xAA
+					 };	
+	FSR[STKPTR] = 31;			 
+	Try{
+		call(&code);
+	}Catch(operandERR){
+		TEST_ASSERT_EQUAL(ERR_STKPTR_OVERFLOW,operandERR);
+	}
+	
+	TEST_ASSERT_EQUAL(0xAA,code.absoluteAddress);
+}
